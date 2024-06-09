@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Auth\Users;
+use App\Mail\OTPEmail;
 use Exception;
+
+use function PHPUnit\Framework\returnSelf;
 
 class RegisterController extends Controller
 {
@@ -38,6 +43,14 @@ class RegisterController extends Controller
 
             Users::create($user);
 
+            // Generate a random 6-digit OTP & save to session
+            $otp = mt_rand(100000, 999999);
+            session()->save('email', $user['email']);
+            session()->save('otp', $otp);
+
+            // Send OTP
+            Mail::to($user['email'])->send(new OTPEmail($otp));
+
             return response()->json([
                 'user'    => $user,
                 'message' => 'Proses pendaftaran akun berhasil'
@@ -48,5 +61,28 @@ class RegisterController extends Controller
                 'errors'  => $error->getMessage()
             ], 500);
         }
+    }
+
+    public function emailVerification(Request $request)
+    {
+        if (!$request->has('otp')) {
+            return response()->json(['error' => 'OTP is missing'], 400);
+        }
+
+        $OTP      = $request->input('otp');
+        $validOTP = session()->get('otp');
+        $email    = session()->get('email');
+
+        if ($OTP != $validOTP) return response()->json([
+            'message' => 'Your OTP code not valid'
+        ], 403);
+
+        $updated = Users::where("email", $email)->update([
+            'isEmailVerified' => true
+        ]);
+
+        return response()->json([
+            'message' => "Verification email is completed"
+        ], 200);
     }
 }

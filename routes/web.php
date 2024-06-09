@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
-use App\Mail\ExampleEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Mail\OTPEmail;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    Mail::to('faidfadjri@gmail.com')->send(new ExampleEmail());
+    Mail::to('faidfadjri.ti@gmail.com')->send(new OTPEmail(58530));
     return view('welcome');
 });
 
