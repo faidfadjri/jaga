@@ -11,8 +11,6 @@ use App\Models\Auth\Users;
 use App\Mail\OTPEmail;
 use Exception;
 
-use function PHPUnit\Framework\returnSelf;
-
 class RegisterController extends Controller
 {
     public function save(RegisterRequest $request)
@@ -45,8 +43,8 @@ class RegisterController extends Controller
 
             // Generate a random 6-digit OTP & save to session
             $otp = mt_rand(100000, 999999);
-            session()->save('email', $user['email']);
-            session()->save('otp', $otp);
+            session()->put('email', $user['email']);
+            session()->put('otp', $otp);
 
             // Send OTP
             Mail::to($user['email'])->send(new OTPEmail($otp));
@@ -65,24 +63,22 @@ class RegisterController extends Controller
 
     public function emailVerification(Request $request)
     {
-        if (!$request->has('otp')) {
-            return response()->json(['error' => 'OTP is missing'], 400);
+        $otp = '';
+        for ($i = 1; $i <= 6; $i++) {
+            $otp = $otp . $request->input('otp-' . $i);
         }
 
-        $OTP      = $request->input('otp');
         $validOTP = session()->get('otp');
-        $email    = session()->get('email');
+        $email = session()->get('email');
 
-        if ($OTP != $validOTP) return response()->json([
-            'message' => 'Your OTP code not valid'
-        ], 403);
+        if ($otp != $validOTP) {
+            return redirect()->back()->withErrors(['Your OTP code is not valid']);
+        }
 
-        $updated = Users::where("email", $email)->update([
+        Users::where("email", $email)->update([
             'isEmailVerified' => true
         ]);
 
-        return response()->json([
-            'message' => "Verification email is completed"
-        ], 200);
+        return redirect('/auth/login')->with('success', 'Email is verified, please login first');
     }
 }

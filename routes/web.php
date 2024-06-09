@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use App\Mail\OTPEmail;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +15,6 @@ use App\Mail\OTPEmail;
 */
 
 Route::get('/', function () {
-    Mail::to('faidfadjri.ti@gmail.com')->send(new OTPEmail(58530));
     return view('welcome');
 });
 
@@ -25,8 +22,15 @@ Route::get('/', function () {
 Route::prefix('auth')->group(function () {
     Route::get('login', fn () => view('auth.login'));
     Route::get('register', fn () => view('auth.register'));
+    Route::get('otp', function () {
+        $email = session()->get('email') ?? 'test@gmail.com';
+        return view('auth.otp', [
+            'email' => $email
+        ]);
+    });
 
     Route::prefix("verification")->group(function () {
         Route::post('register', [RegisterController::class, 'save']);
+        Route::post('otp', [RegisterController::class, 'emailVerification']);
     });
 });

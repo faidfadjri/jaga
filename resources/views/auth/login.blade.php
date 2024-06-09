@@ -16,8 +16,15 @@
                 </div>
             </div>
             <div class="col-sm-12 col-lg-8 right-area">
+
+
                 <div class="login-box">
                     <div class="heading mb-4">
+                        @if (session('success'))
+                            <div class="alert alert-success paragraph px-3 py-2 mb-3">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <h2 class="headline-5 primary">Selamat Datang di JAGA</h2>
                         <p class="paragraph opacity-60">Silahkan login terlebih dahulu</p>
                     </div>

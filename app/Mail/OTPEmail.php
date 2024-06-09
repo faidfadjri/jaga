@@ -29,7 +29,7 @@ class OTPEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Test Email')
+        return $this->subject('Email Verification')
             ->view('emails.otp');
     }
 }

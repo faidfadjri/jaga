@@ -108,3 +108,60 @@ label#profile-picture:hover {
 label#profile-picture input {
     display: none;
 }
+
+
+/* OTP */
+
+.otp-box {
+    width: fit-content;
+    height: fit-content;
+    padding: 50px;
+    background-color: white;
+    border-radius: 0.5em;
+}
+
+.otp-group {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    column-gap: 10px    ;
+}
+
+.otp {
+    min-height: 90px;
+    width: 80px;
+    text-align: center;
+    background-color: #E5E5E5;
+    border: none;
+    transition: all ease-in 0.1s; /* Transition all properties */
+    outline: none;
+}
+
+.otp:focus {
+    border: none;
+    outline: none;
+    background-color: #F0F0F0; /* Change background color on focus */
+}
+
+@media (max-width: 767px) {
+    .otp-box {
+        width: 100vw;
+        height: 100vh;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .otp-group {
+        column-gap: 0px;
+    }
+
+    .otp {
+        min-height: 50px; 
+        width: 50px;
+        font-size: 20px;
+        margin: 5px;
+    }
+}

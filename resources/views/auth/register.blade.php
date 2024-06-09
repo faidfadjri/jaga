@@ -68,7 +68,12 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary" type="submit">Daftar Akun</button>
+                        <button id="register-btn" class="btn btn-primary" type="submit">
+                            <div id="loading" class="spinner-border text-primary d-none" role="status">
+                            </div>
+                            <span id="submit-label">Daftar Akun</span>
+                        </button>
+
                     </div>
                 </div>
             </form>
@@ -111,6 +116,9 @@
         $(document).ready(function() {
             $("#register-form").submit(function(e) {
                 e.preventDefault();
+                $("#register-btn").attr("disabled", true);
+                $("#loading").removeClass("d-none");
+                $("#submit-label").addClass("d-none");
 
                 // Create FormData object
                 var formData = new FormData(this);
@@ -122,21 +130,38 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
+                        $("#register-btn").attr("disabled", false);
+                        $("#loading").addClass("d-none");
+                        $("#submit-label").removeClass("d-none");
+
                         Swal.fire({
                             title: "Selamat!",
                             text: response?.message ||
                                 "Proses pendaftaran akun berhasil",
                             icon: "success"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href =
+                                    "/auth/otp"; // Redirect to /auth/otp after registration
+                            }
                         });
                     },
                     error: function(xhr) {
+                        $("#register-btn").attr("disabled", false);
+                        $("#loading").addClass("d-none");
+
                         // Handle error
                         var errors = xhr.responseJSON.errors;
                         var errorMessages = '';
                         $.each(errors, function(key, value) {
                             errorMessages += value[0] + '\n';
                         });
-                        alert('Registration failed:\n' + errorMessages);
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: errorMessages
+                        });
                     }
                 });
             });
