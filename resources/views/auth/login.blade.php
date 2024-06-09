@@ -2,20 +2,20 @@
 
 
 @push('css')
-    <link rel="stylesheet" href="/css/auth/login.css">
+    <link rel="stylesheet" href="/css/auth/auth.css">
 @endpush
 
 @section('content')
     <section class="bg-secondary">
         <div class="row" style="height: 100%">
-            <div class="col-4 left-area">
+            <div class="col-sm-12 col-lg-4 left-area d-none d-lg-flex">
                 <img src="/assets/images/crime-illustration.svg" alt="Crime Illustration" width="250">
                 <div class="d-flex flex-column align-items-center gap-3">
                     <img src="/assets/images/logo.svg" alt="JAGA logo" width="150">
                     <h1 class="headline-6">Jaringan Analisis & Gugus Anti Kriminal</h1>
                 </div>
             </div>
-            <div class="col-8 right-area">
+            <div class="col-sm-12 col-lg-8 right-area">
                 <div class="login-box">
                     <div class="heading mb-4">
                         <h2 class="headline-5 primary">Selamat Datang di JAGA</h2>

@@ -46,12 +46,21 @@
 
 .right-area .login-box {
     width: 50%;
-    height: fit-content;
+    height: 70%;
     min-height: 50%;
     background-color: white;
-    padding: 40px;
+    padding: 30px;
     border-radius: 5px;
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-area .login-box form {
+    width: 100%;
+    height: fit-content;
 }
 
 .right-area .login-box .heading {
@@ -59,4 +68,43 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+}
+
+
+/* Register */
+.register-box {
+    width: 70%;
+    height: fit-content;
+    padding: 30px;
+    background-color: white;
+    border-radius: 0.5em;
+}
+
+.profile-image {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+
+label#profile-picture {
+    border: 1px solid #AEAEAE;
+    height: fit-content;
+    padding: 8px 20px;
+    border-radius: 0.2em;
+    opacity: 0.7;
+    transition: all ease-in 0.1s;
+}
+
+label#profile-picture:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+label#profile-picture input {
+    display: none;
 }

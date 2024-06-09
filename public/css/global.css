@@ -6,7 +6,8 @@
 
 
 :root {
-    --primary-color : #0D1282
+    --primary-color : #0D1282;
+    --secondary-color: #BEDCFF;
 }
 
 section {
@@ -15,10 +16,25 @@ section {
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: white;
+}
+
+
+.gradient-background {
+    background: linear-gradient(to bottom, #E9FCFF, #DBE1FF);
 }
 
 
 /* Override */
+
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
 
 .form-label {
     font-size: 13px;

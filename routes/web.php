@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 
-Route::prefix('auth')->group(function() {
-    Route::get('login', fn() => view('auth.login'));
+Route::prefix('auth')->group(function () {
+    Route::get('login', fn () => view('auth.login'));
+    Route::get('register', fn () => view('auth.register'));
 });
