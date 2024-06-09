@@ -33,6 +33,9 @@ return [
     |
     */
 
+    'mailersend' => [
+        'transport' => 'mailersend',
+    ],
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',

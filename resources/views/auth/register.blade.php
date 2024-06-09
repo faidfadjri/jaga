@@ -15,7 +15,8 @@
                 <p class="paragraph opacity-60">Silahkan lengkapi form berikut</p>
             </div>
 
-            <form>
+            <form id="register-form" enctype="multipart/form-data">
+                @csrf
                 <div class="d-flex align-items-center gap-4 mb-4">
                     <div class="profile-image bg-secondary rounded-circle">
                         <img id="profile-image-preview" src="/assets/images/default.svg" alt="default-profile-picture"
@@ -25,7 +26,7 @@
                         <p class="tiny-text mb-2 opacity-60"><span style="color: red">*</span> File yang didukung ( jpg,
                             jpeg, png ) maksimal 5mb</p>
                         <label for="profile-picture-input" id="profile-picture" class="small-text">
-                            <input required type="file" id="profile-picture-input" accept="image/*"
+                            <input required type="file" id="profile-picture-input" name="avatar" accept="image/*"
                                 style="display: none;" required>
                             <span id="upload-text">Unggah Foto Profil</span>
                         </label>
@@ -62,7 +63,7 @@
 
                             <div class="d-flex flex-column">
                                 <label for="password-confirmation" class="form-label">Konfirmasi Kata sandi</label>
-                                <input required type="password" id="password-confirmation" name="password-confirmation"
+                                <input required type="password" id="password-confirmation" name="password_confirmation"
                                     class="form-control rounded-1 paragraph px-3 py-2" placeholder="Konfirmasi kata sandi">
                             </div>
                         </div>
@@ -105,6 +106,40 @@
             } else {
                 document.getElementById('password-confirmation').setCustomValidity('');
             }
+        });
+
+        $(document).ready(function() {
+            $("#register-form").submit(function(e) {
+                e.preventDefault();
+
+                // Create FormData object
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: '/auth/verification/register', // Replace with your API endpoint
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        Swal.fire({
+                            title: "Selamat!",
+                            text: response?.message ||
+                                "Proses pendaftaran akun berhasil",
+                            icon: "success"
+                        });
+                    },
+                    error: function(xhr) {
+                        // Handle error
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessages = '';
+                        $.each(errors, function(key, value) {
+                            errorMessages += value[0] + '\n';
+                        });
+                        alert('Registration failed:\n' + errorMessages);
+                    }
+                });
+            });
         });
     </script>
 @endpush

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            
+
             $table->string('username');
             $table->string('fullName');
-            $table->string('NIK');
+            $table->string('NIK')->nullable();
             $table->string('phone');
             $table->string('email');
             $table->string('address')->nullable();
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->enum('role', ['user', 'admin']);
             $table->string('password');
 
-            $table->boolean('isEmailVerified');
-            $table->boolean('isNIKVerified');
+            $table->boolean('isEmailVerified')->default(false);
+            $table->boolean('isNIKVerified')->default(false);
             $table->timestamps();
         });
     }
