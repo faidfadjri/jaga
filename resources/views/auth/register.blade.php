@@ -8,6 +8,9 @@
     <section class="gradient-background d-flex align-items-center justify-content-center">
         <div class="register-box">
             <div class="heading mb-4">
+                <a href="/auth/login" class="d-flex align-items-center mb-3 btn btn-link m-0 p-0">
+                    <i data-feather="arrow-left" style="height: 14px"></i> Kembali ke login
+                </a>
                 <h2 class="headline-5 primary">Daftar Akun</h2>
                 <p class="paragraph opacity-60">Silahkan lengkapi form berikut</p>
             </div>

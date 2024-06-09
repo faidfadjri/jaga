@@ -66,6 +66,10 @@ section {
     border-radius: 4px;
 }
 
+.btn.btn-link {
+    color: var(--primary-color) !important;
+}
+
 .btn.btn-primary-outline {
     width: 100%;
     border-width: 1;

@@ -25,19 +25,20 @@
 
                     <form>
                         <div class="mb-3">
-                          <label for="email_or_username" class="form-label">Email atau username</label>
-                          <input type="text" class="form-control" id="email_or_username" aria-describedby="emailHelp" placeholder="Masukan email atau username">
+                            <label for="email_or_username" class="form-label">Email atau username</label>
+                            <input type="text" class="form-control" id="email_or_username" aria-describedby="emailHelp"
+                                placeholder="Masukan email atau username">
                         </div>
                         <div class="mb-3">
-                          <label for="password" class="form-label">Kata Sandi</label>
-                          <input type="password" class="form-control" id="password" placeholder="Masukan password">
+                            <label for="password" class="form-label">Kata Sandi</label>
+                            <input type="password" class="form-control" id="password" placeholder="Masukan password">
                         </div>
                         <div class="d-flex flex-column gap-3 align-items-center">
                             <button type="submit" class="btn btn-primary">Masuk</button>
                             <p class="small-text opacity-60">belum punya akun ?</p>
-                            <button type="submit" class="btn btn-primary-outline">Daftar Sekarang</button>
+                            <a class="btn btn-primary-outline" href="/auth/register">Daftar Sekarang</a>
                         </div>
-                      </form>
+                    </form>
                 </div>
             </div>
         </div>
