@@ -147,6 +147,7 @@
                         });
                     },
                     error: function(xhr) {
+                        $("#submit-label").addClass("Daftar Akun");
                         $("#register-btn").attr("disabled", false);
                         $("#loading").addClass("d-none");
 

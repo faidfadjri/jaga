@@ -30,18 +30,22 @@
                     </div>
 
 
-                    <form>
+                    <form id="login-form">
+                        @csrf
                         <div class="mb-3">
                             <label for="email_or_username" class="form-label">Email atau username</label>
                             <input type="text" class="form-control" id="email_or_username" aria-describedby="emailHelp"
-                                placeholder="Masukan email atau username">
+                                placeholder="Masukan email atau username" name="email_or_username">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Kata Sandi</label>
-                            <input type="password" class="form-control" id="password" placeholder="Masukan password">
+                            <input type="password" class="form-control" id="password" placeholder="Masukan password"
+                                name="password">
                         </div>
                         <div class="d-flex flex-column gap-3 align-items-center">
-                            <button type="submit" class="btn btn-primary">Masuk</button>
+                            <button type="submit" class="btn btn-primary" id="submit-button">
+                                Masuk
+                            </button>
                             <p class="small-text opacity-60">belum punya akun ?</p>
                             <a class="btn btn-primary-outline" href="/auth/register">Daftar Sekarang</a>
                         </div>
@@ -51,3 +55,59 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#login-form").submit(function(e) {
+                e.preventDefault();
+
+                // Create FormData object
+                var formData = new FormData(this);
+
+                $("#submit-button").html(
+                    `<div id='loading' class='spinner-border text-primary' role='status'></div>`);
+
+                $.ajax({
+                    url: '/auth/verification/login', // Replace with your API endpoint
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $("#submit-button").html("Masuk");
+
+
+                        Swal.fire({
+                            title: "Selamat!",
+                            text: response?.message ||
+                                "Proses login berhasil",
+                            icon: "success"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href =
+                                    "/"; // Redirect to /auth/otp after registration
+                            }
+                        });
+                    },
+                    error: function(xhr) {
+                        $("#submit-button").html("Masuk");
+
+                        // Handle error
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessages = '';
+                        $.each(errors, function(key, value) {
+                            errorMessages += value[0] + '\n';
+                        });
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: errorMessages
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

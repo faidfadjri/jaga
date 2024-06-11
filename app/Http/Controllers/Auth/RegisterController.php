@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\Auth\Users;
 use App\Mail\OTPEmail;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -34,7 +35,7 @@ class RegisterController extends Controller
                 'email'     => $request->input('email'),
                 'fullName'  => $request->input('fullName'),
                 'phone'     => $request->input('phone'),
-                'password'  => $request->input('password'),
+                'password'  => Hash::make($request->input('password')),
                 'avatar'    => $avatarName,
                 'username'  => $username
             ];

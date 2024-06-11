@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::prefix('auth')->group(function () {
     });
 
     Route::prefix("verification")->group(function () {
+        Route::post('login', [LoginController::class, 'save']);
         Route::post('register', [RegisterController::class, 'save']);
         Route::post('otp', [RegisterController::class, 'emailVerification']);
     });
