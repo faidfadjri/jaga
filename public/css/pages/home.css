@@ -1,0 +1,16 @@
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+}
+
+.bg-landing-page {
+    height: 100vh;
+    background-color: #F9FEFF !important;
+    position: relative;
+}   
+
+.line {
+    position: absolute;
+    width: 100%;
+}

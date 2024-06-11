@@ -15,10 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/', fn () => view('pages.index'));
 
 Route::prefix('auth')->group(function () {
     Route::get('login', fn () => view('auth.login'));

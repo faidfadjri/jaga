@@ -17,6 +17,8 @@ section {
     overflow-x: hidden;
     overflow-y: auto;
     background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -142,4 +144,26 @@ section {
     margin: 0;
     padding: 0;
     font-size: 10.42px;
+}
+
+.orange-label {
+    color: white;
+    background-color: #FF7B01;
+    padding: 6px 20px;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+
+/* NAVBAR */
+.navbar {
+    height: 80px !important;
+    background: linear-gradient(to bottom, "#FFFFFF", "FAFAFA") !important;
+    box-shadow: -4px 10px 15px -13px rgba(0,0,0,0.1);
+}
+
+.navbar .container-fluid {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
 }
