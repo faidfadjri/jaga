@@ -1,7 +1,7 @@
 .hero-text {
     display: flex;
     flex-direction: column;
-    row-gap: 25px;
+    row-gap: 10px;
 }
 
 .bg-landing-page {
@@ -13,4 +13,11 @@
 .line {
     position: absolute;
     width: 100%;
+}
+
+.whatsapp {
+    width: 14em;
+    position: absolute;
+    right: 2%;
+    bottom: 5%;
 }

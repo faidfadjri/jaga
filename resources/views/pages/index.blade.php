@@ -10,6 +10,8 @@
         @include('templates.navbar')
 
         <img src="/assets/images/line.svg" class="line" alt="line-svg">
+        <img src="/assets/images/whatsapp.svg" alt="whatsapp" class="whatsapp">
+
         <div class="row align-items-center" style="flex-grow: 1; z-index: 10;">
             <div class="col-6 d-flex align-items-center justify-content-center">
                 <div class="illustration">
