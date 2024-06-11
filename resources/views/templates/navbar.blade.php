@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg" style="z-index: 100; position: sticky; top: 0%">
     <div class="container-fluid d-flex justify-content-between align-items-center">
         <a class="navbar-brand" href="#">
             <img src="/assets/images/logo.svg" alt="JAGA">

@@ -10,8 +10,7 @@
     --secondary-color: #BEDCFF;
 }
 
-section {
-    height: 100dvh;
+.section {
     min-height: 100vh;
     width: 100%;
     overflow-x: hidden;
@@ -19,6 +18,15 @@ section {
     background-color: white;
     display: flex;
     flex-direction: column;
+}
+
+.footer {
+    height: 300px !important;
+    width: 100%;
+    background-color: #03396B;
+    border-top-left-radius: 5em;
+    border-top-right-radius: 5em;
+    padding: 3em;
 }
 
 
@@ -158,8 +166,10 @@ section {
 /* NAVBAR */
 .navbar {
     height: 80px !important;
-    background: linear-gradient(to bottom, "#FFFFFF", "FAFAFA") !important;
+    background-color: white;
+    background: linear-gradient(to bottom, "#FFFFFF", "#FAFAFA") !important;
     box-shadow: -4px 10px 15px -13px rgba(0,0,0,0.1);
+    z-index: 200;
 }
 
 .navbar .container-fluid {
@@ -167,3 +177,23 @@ section {
     align-content: center;
     justify-content: space-between;
 }
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

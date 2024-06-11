@@ -21,3 +21,41 @@
     right: 2%;
     bottom: 5%;
 }
+
+.feature-row {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.feature-row::before {
+    content: " ";
+    width: 40%;
+    height: 100%;
+    background-color: #E9F8FF;
+    position: absolute;
+    z-index: -1;
+    border-radius: 5em;
+    left: -2%;
+    top: 14%;
+    transform: rotate(45deg);
+}
+
+.feature-row-right {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.feature-row-right::before {
+    content: " ";
+    width: 40%;
+    height: 100%;
+    background-color: #E9F8FF;
+    position: absolute;
+    z-index: -1;
+    border-radius: 5em;
+    right: -2%;
+    top: 14%;
+    transform: rotate(-45deg);
+}
