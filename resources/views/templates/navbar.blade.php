@@ -11,17 +11,39 @@
             id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 ms-5 mb-lg-0" style="width: fit-content">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link {{ session()->get('active') == 'home' ? 'active' : '' }}" aria-current="page"
+                        href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tentang Kami</a>
+                    <a class="nav-link {{ session()->get('active') == 'about' ? 'active' : '' }}" href="/about">Tentang
+                        Kami</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu</a>
-                </li>
+
+
+                @session('user')
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Menu</a>
+                    </li>
+                @endsession
             </ul>
-            <a href="/auth/login" class="btn btn-primary-outline px-4 ms-lg-3" style="width: fit-content">Masuk /
-                Daftar</a>
+
+            @if (!session()->get('user'))
+                <a href="/auth/login" class="btn btn-primary-outline px-4 ms-lg-3" style="width: fit-content">Masuk /
+                    Daftar</a>
+            @else
+                <div class="dropdown">
+                    <button class="border-0 d-flex align-items-center bg-transparent gap-3 dropdown-toggle"
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <p>{{ session()->get('user')->fullName }}</p>
+
+                        <img src="/assets/users/{{ session()->get('user')->avatar }}" height="40" width="40">
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
 </nav>

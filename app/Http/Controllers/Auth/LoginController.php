@@ -25,8 +25,16 @@ class LoginController extends Controller
             'error'   => 'INVALID'
         ], 403);
 
+
+        session()->put('user', $user);
         return response()->json([
             'message' => 'Login succeed'
         ], 200);
+    }
+
+    public function logout()
+    {
+        session()->flush();
+        return redirect()->to('/');
     }
 }

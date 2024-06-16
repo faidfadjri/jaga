@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', fn () => view('pages.index'));
+Route::get('/', [PageController::class, 'index']);
+Route::get('about', [PageController::class, 'about']);
 
 Route::prefix('auth')->group(function () {
     Route::get('login', fn () => view('auth.login'));
     Route::get('register', fn () => view('auth.register'));
+    Route::get('logout', [LoginController::class, 'logout']);
+
     Route::get('otp', function () {
         $email = session()->get('email') ?? 'test@gmail.com';
         return view('auth.otp', [

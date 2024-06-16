@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Auth\Users;
-use App\Mail\OTPEmail;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,7 +18,7 @@ class RegisterController extends Controller
             // Get the uploaded avatar file
             $avatar = $request->file('avatar');
             $avatarName = uniqid('avatar_') . '.' . $avatar->getClientOriginalExtension();
-            $avatar->storeAs('public/assets/users', $avatarName);
+            $avatar->storeAs('users', $avatarName, 'public_assets');
 
             $username = Str::slug($request->input('fullName'));
 
@@ -48,7 +46,7 @@ class RegisterController extends Controller
             session()->put('otp', $otp);
 
             // Send OTP
-            Mail::to($user['email'])->send(new OTPEmail($otp));
+            // Mail::to($user['email'])->send(new OTPEmail($otp));
 
             return response()->json([
                 'user'    => $user,

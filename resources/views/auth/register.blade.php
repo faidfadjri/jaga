@@ -5,7 +5,8 @@
 @endpush
 
 @section('content')
-    <section class="gradient-background d-flex align-items-center justify-content-center">
+    <section class="gradient-background d-flex align-items-center justify-content-center"
+        style="height: 100vh; overflow-x: hidden">
         <div class="register-box">
             <div class="heading mb-4">
                 <a href="/auth/login" class="d-flex align-items-center mb-3 btn btn-link m-0 p-0">
@@ -69,8 +70,6 @@
                         </div>
 
                         <button id="register-btn" class="btn btn-primary" type="submit">
-                            <div id="loading" class="spinner-border text-primary d-none" role="status">
-                            </div>
                             <span id="submit-label">Daftar Akun</span>
                         </button>
 
@@ -116,9 +115,8 @@
         $(document).ready(function() {
             $("#register-form").submit(function(e) {
                 e.preventDefault();
-                $("#register-btn").attr("disabled", true);
-                $("#loading").removeClass("d-none");
-                $("#submit-label").addClass("d-none");
+                $("#register-btn").html(`<div id="loading" class="spinner-border text-primary" role="status">
+                            </div>`);
 
                 // Create FormData object
                 var formData = new FormData(this);
@@ -130,9 +128,7 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        $("#register-btn").attr("disabled", false);
-                        $("#loading").addClass("d-none");
-                        $("#submit-label").removeClass("d-none");
+                        $("#register-btn").html("Daftar Akun");
 
                         Swal.fire({
                             title: "Selamat!",
@@ -142,14 +138,12 @@
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.location.href =
-                                    "/auth/otp"; // Redirect to /auth/otp after registration
+                                    "/auth/login"; // Redirect to /auth/otp after registration
                             }
                         });
                     },
                     error: function(xhr) {
-                        $("#submit-label").addClass("Daftar Akun");
-                        $("#register-btn").attr("disabled", false);
-                        $("#loading").addClass("d-none");
+                        $("#register-btn").html("Daftar Akun");
 
                         // Handle error
                         var errors = xhr.responseJSON.errors;

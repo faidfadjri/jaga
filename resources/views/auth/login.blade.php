@@ -6,7 +6,7 @@
 @endpush
 
 @section('content')
-    <section class="bg-secondary">
+    <section class="bg-secondary" style="height: 100vh; overflow-x: hidden">
         <div class="row" style="height: 100%">
             <div class="col-sm-12 col-lg-4 left-area d-none d-lg-flex">
                 <img src="/assets/images/crime-illustration.svg" alt="Crime Illustration" width="250">
