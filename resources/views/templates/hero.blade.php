@@ -3,12 +3,12 @@
     <img src="/assets/images/whatsapp.svg" alt="whatsapp" class="whatsapp">
 
     <div class="row align-items-center" style="flex-grow: 1; z-index: 10;">
-        <div class="col-6 d-flex align-items-center justify-content-center">
+        <div class="col-sm-12 col-lg-6 d-flex align-items-center justify-content-center">
             <div class="illustration">
                 <img src="/assets/images/police.svg" alt="police illustration">
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-sm-12 col-lg-6 p-5 p-lg-0">
             <div class="hero-text">
                 <p class="headline-6">Selamat Datang di</p>
                 <h1 class="headline-1 primary fw-bolder">Jaringan Analisis & <br> Gugus Anti-Kriminal</h1>

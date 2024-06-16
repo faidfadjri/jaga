@@ -197,3 +197,21 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+
+
+
+  /* MOBILE */
+
+  @media (max-width: 767px) {
+    .headline-1 {
+        font-size: 33px;
+    }
+
+    .headline-2 {
+        font-size: 26px;
+    }
+
+    .footer {
+        border-radius: 0.2em;
+    }
+  }

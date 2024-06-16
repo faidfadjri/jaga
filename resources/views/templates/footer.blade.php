@@ -9,7 +9,7 @@
                     </p>
                 </div>
                 <div class="col">
-                    <ul class="d-flex gap-3" style="list-style: none">
+                    <ul class="d-flex flex-column flex-lg-row gap-3" style="list-style: none">
                         <li>
                             <a href="#" style="color: white; opacity: 80%" class="paragpraph">Tentang JAGA</a>
                         </li>
