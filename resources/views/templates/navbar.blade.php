@@ -22,7 +22,7 @@
 
                 @session('user')
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Menu</a>
+                        <a class="nav-link {{ session()->get('active') == 'menu' ? 'active' : '' }}" href="/menu">Menu</a>
                     </li>
                 @endsession
             </ul>

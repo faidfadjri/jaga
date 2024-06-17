@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index']);
 Route::get('about', [PageController::class, 'about']);
+Route::get('menu', [MenuController::class, 'index']);
 
 Route::prefix('auth')->group(function () {
     Route::get('login', fn () => view('auth.login'));
