@@ -9,10 +9,26 @@
     flex-direction: column;
     color: #032B47;
     border-radius: 4px !important;
+    background-color: white;
 }
 
 .nav-link.tab.active {
     border: none;
     background-color: #0D1282;
     color: white;
+}
+
+
+.input-ktp {
+    cursor: pointer;
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    column-gap: 14px;
+}
+
+.input-ktp input {
+    display: none;
 }
