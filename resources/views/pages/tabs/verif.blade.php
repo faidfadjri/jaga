@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-sm-12 col-lg-6">
-            <form action="/menu/verif/store" enctype="multipart/form-data" method="POST">
+            <form action="/menu/verif/store" enctype="multipart/form-data" method="POST" id="ktp-form">
                 @csrf
                 <div class="mb-3 d-flex flex-column">
                     <label for="input-ktp" class="small-text opacity-60 mb-2 fw-bold">
@@ -42,6 +42,43 @@
             inputKtp.addEventListener('change', function(event) {
                 const fileName = event.target.files[0] ? event.target.files[0].name : 'Unggah Foto KTP';
                 labelInputKtp.innerHTML = fileName;
+            });
+        });
+
+        $(document).ready(function() {
+            $("#ktp-form").submit(function(e) {
+                e.preventDefault();
+
+                const inputKtp = $('#input-ktp')[0].files;
+
+                if (inputKtp.length === 0) {
+                    alert('Silakan unggah foto KTP terlebih dahulu.');
+                    return;
+                }
+
+                let formData = new FormData(this);
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: $(this).attr('method'),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        Swal.fire({
+                            title: "Selamat!",
+                            text: "Proses verifikasi KTP berhasil!",
+                            icon: "success"
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire({
+                            title: "Oops!",
+                            text: xhr?.responseJSON?.message,
+                            icon: "error"
+                        });
+                    }
+                });
             });
         });
     </script>

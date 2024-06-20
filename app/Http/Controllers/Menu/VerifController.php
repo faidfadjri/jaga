@@ -3,26 +3,41 @@
 namespace App\Http\Controllers\Menu;
 
 use App\Http\Controllers\Controller;
+use App\Models\Auth\Attachment;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class VerifController extends Controller
 {
     public function store(Request $request)
     {
-        // Validate the request
-        $validatedData = $request->validate([
-            'ktp' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        try {
+            // Validate the request
+            $validatedData = $request->validate([
+                'ktp' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
 
-        // If validation fails, Laravel automatically redirects back with errors.
-        // You don't need to manually check for validation errors here.
+            if ($request->file('ktp')) {
+                $ktp = $request->file('ktp');
+                $uniqueName = uniqid() . '_' . $ktp->getClientOriginalName();
+                $ktp->storeAs('users', $uniqueName, 'public');
 
-        // Handle the validated data (e.g., store the file, save the data to the database, etc.)
-        if ($request->file('ktp')) {
-            $path = $request->file('ktp')->store('ktp_images', 'public');
-            // Save the path to the database or perform other actions
+                // save to database
+                Attachment::create([
+                    'fileName' => $uniqueName,
+                    'fileType' => $ktp->getClientOriginalExtension(),
+                    'userId'  => session()->get('user')->id
+                ]);
+            }
+
+            return redirect()->back()->with('message', 'KTP uploaded successfully!');
+        } catch (Exception $error) {
+            Log::critical($error->getMessage());
+            return response()->json([
+                'message' => "we're experiencing an issue"
+            ], 500);
         }
-
-        return redirect()->back()->with('message', 'KTP uploaded successfully!');
     }
 }

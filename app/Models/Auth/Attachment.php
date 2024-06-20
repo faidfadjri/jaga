@@ -4,19 +4,19 @@ namespace App\Models\Auth;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User;
 
-class Users extends Model
+class Attachment extends Model
 {
     use HasFactory;
-    protected $table      = 'users';
+    protected $table      = 'user_attachment';
     protected $primaryKey = 'id';
     protected $guarded    = ['id'];
     public $incrementing  = true;
 
-
-    public function attachment(): HasMany
+    public function user(): BelongsTo
     {
-        return $this->hasMany(Attachment::class, 'user_id', 'id');
+        return $this->belongsTo(Users::class, 'user_id', 'id');
     }
 }
