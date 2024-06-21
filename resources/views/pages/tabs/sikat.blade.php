@@ -1,4 +1,4 @@
-<div class="tab-pane p-3 fade rounded-2 mt-2" id="sikat" role="tabpanel" aria-labelledby="sikat-tab"
+<div class="tab-pane p-3 fade rounded-2 mt-2 px-4 py-3  " id="sikat" role="tabpanel" aria-labelledby="sikat-tab"
     style="background: #EBF4FF">
     <p class="paragpraph mb-3">
         <strong>SIKAT</strong> adalah layanan JAGA untuk proses pengaduan data kriminal yang ditemukan oleh user, Data
@@ -8,12 +8,27 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="">
+            @session('error')
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endsession
+
+            @session('success')
+                <div class="alert alert-primary" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endsession
+
+        </div>
+        <div class="col-12">
+            <form action="/menu/sikat/store" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="mb-3 d-flex flex-column">
                     <label for="kategori-kasus" class="small-text opacity-60 mb-2 fw-bold">
                         Pilih Kategori Kasus
                     </label>
-                    <select name="kategori-kasus" id="kategori-kasus" class="form-control" required>
+                    <select name="report[crime_type]" id="kategori-kasus" class="form-control" required>
                         <option value="">Pilih Kategori Kasus</option>
                         <option value="Penipuan">Penipuan</option>
                         <option value="Narkotika">Narkotika</option>
@@ -22,19 +37,27 @@
                 </div>
 
                 <div class="mb-3 d-flex flex-column">
+                    <label for="deskripsi-kasus" class="small-text opacity-60 mb-2 fw-bold">
+                        Deskripsi Kejadian
+                    </label>
+                    <textarea name="report[description]" id="deskripsi-kasus" class="form-control" placeholder="Masukan deskripsi kasus"
+                        required></textarea>
+                </div>
+
+                <div class="mb-3 d-flex flex-column">
                     <label for="lokasi-kejadian" class="small-text opacity-60 mb-2 fw-bold">
                         Masukan Lokasi Kejadian
                     </label>
-                    <input type="text" class="form-control" id="lokasi-kejadian"
+                    <input type="text" name="report[location]" class="form-control" id="lokasi-kejadian"
                         placeholder="Masukan Lokasi Kejadian" required>
                 </div>
 
                 <div class="mb-3 d-flex flex-column">
-                    <label for="waktu-kejadian" class="small-text opacity-60 mb-2 fw-bold">
+                    <label for="tanggal-kejadian" class="small-text opacity-60 mb-2 fw-bold">
                         Waktu Kejadian
                     </label>
-                    <input type="time" id="waktu-kejadian" class="form-control" placeholder="Masukan Lokasi Kejadian"
-                        required>
+                    <input type="date" name="report[date]" id="tanggal-kejadian" class="form-control"
+                        placeholder="Masukan Waktu Kejadian" required>
                 </div>
 
                 <div class="mb-3 d-flex flex-column">
@@ -44,9 +67,10 @@
                     <label for="bukti-kejadian" class="input-file mb-2">
                         <i class="bi bi-folder2-open"></i>
                         <span id="label-bukti-kejadian">Unggah Bukti Kejadian</span>
-                        <input type="file" class="form-control" id="bukti-kejadian">
+                        <input type="file" class="form-control" id="bukti-kejadian" name="evidence">
                     </label>
                 </div>
+                <button class="btn btn-primary px-4" style="width: fit-content">Pengaduan Tindakan Kriminal</button>
             </form>
         </div>
     </div>

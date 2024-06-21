@@ -2,6 +2,7 @@
 
     use App\Http\Controllers\Auth\LoginController;
     use App\Http\Controllers\Auth\RegisterController;
+    use App\Http\Controllers\Menu\SikatController;
     use App\Http\Controllers\Menu\VerifController;
     use App\Http\Controllers\MenuController;
     use App\Http\Controllers\PageController;
@@ -28,6 +29,7 @@
     Route::prefix('menu')->group(function () {
         Route::get('/', [MenuController::class, 'index']);
         Route::post('verif/store', [VerifController::class, 'store']);
+        Route::post('sikat/store', [SikatController::class, 'store']);
     });
 
     Route::prefix('auth')->group(function () {

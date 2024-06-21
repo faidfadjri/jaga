@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('criminal_report', function (Blueprint $table) {
             $table->id();
-            
+
             $table->unsignedBigInteger('reportBy');
             $table->foreign('reportBy')->references('id')->on('users');
 
-            $table->enum('crimeType', ['Penipuan', 'Narkotika', 'Penganiayaan']);
+            $table->string('crimeType');
             $table->text('description');
 
             $table->dateTime('date');
             $table->string('location');
 
-            $table->boolean('verified');
+            $table->boolean('verified')->default(false);
 
             $table->timestamps();
         });
