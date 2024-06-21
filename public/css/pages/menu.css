@@ -19,7 +19,7 @@
 }
 
 
-.input-ktp {
+.input-file {
     cursor: pointer;
     background-color: white;
     padding: 10px 20px;
@@ -29,6 +29,6 @@
     column-gap: 14px;
 }
 
-.input-ktp input {
+.input-file input {
     display: none;
 }

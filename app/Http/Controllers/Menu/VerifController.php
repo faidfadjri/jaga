@@ -7,7 +7,6 @@ use App\Models\Auth\Attachment;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class VerifController extends Controller
 {

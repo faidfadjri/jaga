@@ -21,7 +21,7 @@
                     <label for="input-ktp" class="small-text opacity-60 mb-2 fw-bold">
                         Foto KTP (png, jpeg, jpg)
                     </label>
-                    <label for="input-ktp" class="input-ktp mb-2">
+                    <label for="input-ktp" class="input-file mb-2">
                         <i class="bi bi-folder2-open"></i>
                         <span id="label-input-ktp">Unggah Foto KTP</span>
                         <input type="file" class="form-control" id="input-ktp" name="ktp">
