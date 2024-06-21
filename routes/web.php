@@ -2,6 +2,7 @@
 
     use App\Http\Controllers\Auth\LoginController;
     use App\Http\Controllers\Auth\RegisterController;
+    use App\Http\Controllers\BarcodeController;
     use App\Http\Controllers\Menu\SikatController;
     use App\Http\Controllers\Menu\VerifController;
     use App\Http\Controllers\MenuController;
@@ -22,7 +23,6 @@
 
     Route::get('/', [PageController::class, 'index']);
     Route::get('about', [PageController::class, 'about']);
-
 
 
     // Menu
