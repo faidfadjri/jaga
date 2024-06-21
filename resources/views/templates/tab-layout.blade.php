@@ -41,32 +41,44 @@
     </ul>
 </div>
 
-
 @push('scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            function activateTabFromHash() {
-                // Get the URL fragment
-                var hash = window.location.hash;
+            function getQueryParams() {
+                const params = {};
+                const queryString = window.location.search.substring(1);
+                const regex = /([^&=]+)=([^&]*)/g;
+                let m;
+                while (m = regex.exec(queryString)) {
+                    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+                }
+                return params;
+            }
 
-                // If there is a hash in the URL
-                if (hash) {
-                    // Find the tab link corresponding to the hash
-                    var tabLink = document.querySelector(`a[href="${hash}"]`);
+            function activateTabFromParamsOrHash() {
+                const params = getQueryParams();
+                const hash = window.location.hash;
+                let tabLink;
 
-                    // If the tab link exists, trigger a click event on it to make it active
-                    if (tabLink) {
-                        var tab = new bootstrap.Tab(tabLink);
-                        tab.show();
-                    }
+                // Check if username parameter exists
+                if (params.username) {
+                    tabLink = document.querySelector(`a[href="#reksa"]`);
+                } else if (hash) {
+                    tabLink = document.querySelector(`a[href="${hash}"]`);
+                }
+
+                // If the tab link exists, trigger a click event on it to make it active
+                if (tabLink) {
+                    var tab = new bootstrap.Tab(tabLink);
+                    tab.show();
                 }
             }
 
-            // Activate tab based on initial URL fragment
-            activateTabFromHash();
+            // Activate tab based on URL parameters or fragment
+            activateTabFromParamsOrHash();
 
             // Listen for hash change events
-            window.addEventListener('hashchange', activateTabFromHash);
+            window.addEventListener('hashchange', activateTabFromParamsOrHash);
         });
     </script>
 @endpush
