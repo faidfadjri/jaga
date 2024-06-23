@@ -8,8 +8,12 @@ class MenuController extends Controller
 {
     public function index(Request $request)
     {
-        $username = $request->input('username');
+        $username = $request->input('username') ?? session('user')->username;
         session()->put('active', 'menu');
-        return view('pages.menu');
+
+
+        return view('pages.menu', [
+            'username' => $username
+        ]);
     }
 }
