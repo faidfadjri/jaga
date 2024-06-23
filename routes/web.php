@@ -2,7 +2,6 @@
 
     use App\Http\Controllers\Auth\LoginController;
     use App\Http\Controllers\Auth\RegisterController;
-    use App\Http\Controllers\BarcodeController;
     use App\Http\Controllers\Menu\SikatController;
     use App\Http\Controllers\Menu\VerifController;
     use App\Http\Controllers\MenuController;
@@ -23,6 +22,8 @@
 
     Route::get('/', [PageController::class, 'index']);
     Route::get('about', [PageController::class, 'about']);
+    Route::get('detail-record', [PageController::class, 'detailRecord']);
+
 
 
     Route::middleware('admin')->prefix('admin')->group(function () {
@@ -32,6 +33,8 @@
         Route::get('detail-record', [PageController::class, 'detailRecord']);
         Route::post('add-record', [PageController::class, 'addRecord']);
         Route::delete('delete-record/{recordId}', [PageController::class, 'deleteRecord']);
+
+
 
         Route::get('/report', [PageController::class, 'report']);
         Route::get('/user', [PageController::class, 'user']);

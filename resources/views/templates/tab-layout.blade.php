@@ -61,7 +61,7 @@
                 let tabLink;
 
                 // Check if username parameter exists
-                if (params.username) {
+                if (params.userId) {
                     tabLink = document.querySelector(`a[href="#reksa"]`);
                 } else if (hash) {
                     tabLink = document.querySelector(`a[href="${hash}"]`);

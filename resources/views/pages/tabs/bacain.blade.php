@@ -9,7 +9,7 @@
         <div class="col-12 d-flex align-items-center justify-content-center">
             <div class="bg-white p-2" style="width: fit-content">
                 <div class="barcode">
-                    {!! DNS1D::getBarcodeHTML('1234567890', 'C39', 5, 100) !!}
+                    {!! DNS1D::getBarcodeHTML(session('user')->id, 'C39', 5, 100) !!}
                 </div>
             </div>
         </div>
@@ -36,7 +36,9 @@
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             // Handle the result here
             console.log(`Code scanned: ${decodedText}`);
-            alert(`Code scanned: ${decodedText}`);
+
+            location.href = "/menu?userId=" + decodedText;
+
             // Stop scanning
             html5QrCode.stop().then((ignore) => {
                 // QR Code scanning is stopped.

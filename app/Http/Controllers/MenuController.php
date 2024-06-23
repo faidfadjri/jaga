@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auth\Users;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
     public function index(Request $request)
     {
-        $username = $request->input('username') ?? session('user')->username;
+        $userId = $request->input('userId') ?? session('user')->id;
+        $user     = Users::find($userId);
+
         session()->put('active', 'menu');
 
-
         return view('pages.menu', [
-            'username' => $username
+            'user' => $user
         ]);
     }
 }
