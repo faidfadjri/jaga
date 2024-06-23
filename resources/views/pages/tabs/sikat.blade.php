@@ -80,12 +80,12 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const inputKtp = document.getElementById('bukti-kejadian');
-            const labelInputKtp = document.getElementById('label-bukti-kejadian');
+            const inputSIKAT = document.getElementById('bukti-kejadian');
+            const labelinputSIKAT = document.getElementById('label-bukti-kejadian');
 
-            inputKtp.addEventListener('change', function(event) {
+            inputSIKAT.addEventListener('change', function(event) {
                 const fileName = event.target.files[0] ? event.target.files[0].name : 'Unggah Foto KTP';
-                labelInputKtp.innerHTML = fileName;
+                labelinputSIKAT.innerHTML = fileName;
             });
         });
 
@@ -93,9 +93,9 @@
             $("#ktp-form").submit(function(e) {
                 e.preventDefault();
 
-                const inputKtp = $('#bukti-kejadian')[0].files;
+                const inputSIKAT = $('#bukti-kejadian')[0].files;
 
-                if (inputKtp.length === 0) {
+                if (inputSIKAT.length === 0) {
                     alert('Silakan unggah bukti kejadian terlebih dahulu.');
                     return;
                 }

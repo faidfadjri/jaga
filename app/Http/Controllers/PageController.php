@@ -152,7 +152,12 @@ class PageController extends Controller
 
     public function user()
     {
+
+        $users = Users::with('attachment');
+
         session()->put('active', 'user');
-        return view('pages.admin.user');
+        return view('pages.admin.user', [
+            'users' => $users->paginate(4)
+        ]);
     }
 }
