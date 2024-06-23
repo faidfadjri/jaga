@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Auth\Users;
 use App\Models\Menu\Record;
 use App\Models\Menu\Report;
+use App\Models\Menu\ReportNews;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PageController extends Controller
 {
@@ -98,10 +101,54 @@ class PageController extends Controller
         $reports = Report::with(['pelapor', 'news']);
         session()->put('active', 'report');
 
+        // dd($reports->first()->toArray());
+
         return view('pages.admin.report', [
             'reports' => $reports->paginate(4)
         ]);
     }
+
+    public function reportVerification(Request $request)
+    {
+
+        // Retrieve inputs from the request
+        $reportId = $request->input('reportId');
+        $verification = $request->input('verification');
+        $news = $request->file('news');
+
+        // Find the report
+        $report = Report::find($reportId);
+
+        // Check if there is existing news
+        $existingNews = ReportNews::where('reportId', $reportId)->first();
+
+        // Delete existing news if it exists
+        if ($existingNews) {
+            // Delete the associated file
+            Storage::disk('public_assets')->delete('news/' . $existingNews->fileName);
+
+            // Delete the existing news record
+            $existingNews->delete();
+        }
+
+        // Store new news file
+        $newsName = uniqid('avatar_') . '.' . $news->getClientOriginalExtension();
+        $news->storeAs('news', $newsName, 'public_assets');
+
+        // Create a new ReportNews record
+        ReportNews::create([
+            'reportId' => $reportId,
+            'fileName' => $newsName,
+            'fileType' => $news->getClientOriginalExtension()
+        ]);
+
+        // Update the status of the report based on verification
+        $report->update(['status' => $verification == "Benar" ? "Verified" : "Rejected"]);
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Proses verifikasi kasus berhasil');
+    }
+
 
     public function user()
     {

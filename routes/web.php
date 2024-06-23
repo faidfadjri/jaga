@@ -35,6 +35,8 @@
         Route::delete('delete-record/{recordId}', [PageController::class, 'deleteRecord']);
 
 
+        // Criminal Report
+        Route::post('report-verification', [PageController::class, 'reportVerification']);
 
         Route::get('/report', [PageController::class, 'report']);
         Route::get('/user', [PageController::class, 'user']);
