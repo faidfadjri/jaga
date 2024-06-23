@@ -25,6 +25,13 @@
     Route::get('about', [PageController::class, 'about']);
 
 
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [PageController::class, 'record']);
+        Route::get('/report', [PageController::class, 'report']);
+        Route::get('/user', [PageController::class, 'user']);
+    });
+
+
     // Menu
     Route::prefix('menu')->group(function () {
         Route::get('/', [MenuController::class, 'index']);

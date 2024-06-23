@@ -17,12 +17,12 @@ return new class extends Migration
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('id')->on('users');
 
-            $table->enum('crimeType', ['Penipuan', 'Narkotika', 'Penganiayaan', 'Lainya'])->default('Lainya');
+            $table->string('crimeType');
             $table->text('description');
 
             $table->dateTime('date');
             $table->string('location');
-            
+
             $table->timestamps();
         });
     }

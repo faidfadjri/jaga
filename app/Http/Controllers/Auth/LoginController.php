@@ -28,7 +28,8 @@ class LoginController extends Controller
 
         session()->put('user', $user);
         return response()->json([
-            'message' => 'Login succeed'
+            'message' => 'Login succeed',
+            'user'    => $user
         ], 200);
     }
 

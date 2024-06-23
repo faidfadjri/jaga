@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Models\Auth;
+namespace App\Models\Menu;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User;
 
-class Attachment extends Model
+class Record extends Model
 {
     use HasFactory;
-    protected $table      = 'user_attachment';
+    protected $table      = 'criminal_records';
     protected $primaryKey = 'id';
     protected $guarded    = ['id'];
     public $incrementing  = true;
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(Users::class, 'userId', 'id');
+        return $this->belongsTo(User::class, 'userId', 'id');
     }
 }

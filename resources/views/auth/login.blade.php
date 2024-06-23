@@ -77,16 +77,20 @@
                     success: function(response) {
                         $("#submit-button").html("Masuk");
 
-
+                        const user = response?.user;
                         Swal.fire({
                             title: "Selamat!",
                             text: response?.message ||
                                 "Proses login berhasil",
                             icon: "success"
                         }).then((result) => {
+
+
+                            const redirectURL = user?.role === "user" ? "/" : "/admin";
+
                             if (result.isConfirmed) {
                                 window.location.href =
-                                    "/"; // Redirect to /auth/otp after registration
+                                redirectURL; // Redirect to /auth/otp after registration
                             }
                         });
                     },

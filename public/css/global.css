@@ -198,6 +198,10 @@
     background: #555; 
   }
 
+  .navbar .nav-item .nav-link.active {
+    background-color: #C4DFFF;
+  }
+
 
 
   /* MOBILE */

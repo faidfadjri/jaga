@@ -7,7 +7,11 @@ refresh:
 seed:
 	php artisan db:seed
 
+serve:
+	php artisan serve
+
 dev:
 	@make rollback
 	@make refresh
 	@make seed
+	@make serve

@@ -9,22 +9,45 @@
         </button>
         <div class="collapse navbar-collapse bg-white px-3 py-2 d-lg-flex align-items-lg-center justify-content-lg-between"
             id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 ms-5 mb-lg-0" style="width: fit-content">
-                <li class="nav-item">
-                    <a class="nav-link {{ session()->get('active') == 'home' ? 'active' : '' }}" aria-current="page"
-                        href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ session()->get('active') == 'about' ? 'active' : '' }}" href="/about">Tentang
-                        Kami</a>
-                </li>
+            <ul class="navbar-nav mb-2 ms-5 mb-lg-0 gap-2" style="width: fit-content">
 
-
-                @session('user')
+                @if (session('user')->role != 'admin')
                     <li class="nav-item">
-                        <a class="nav-link {{ session()->get('active') == 'menu' ? 'active' : '' }}" href="/menu">Menu</a>
+                        <a class="nav-link {{ session()->get('active') == 'home' ? 'active' : '' }}" aria-current="page"
+                            href="/">Home</a>
                     </li>
-                @endsession
+                    <li class="nav-item">
+                        <a class="nav-link {{ session()->get('active') == 'about' ? 'active' : '' }}"
+                            href="/about">Tentang
+                            Kami</a>
+                    </li>
+
+                    @session('user')
+                        <li class="nav-item">
+                            <a class="nav-link {{ session()->get('active') == 'menu' ? 'active' : '' }}"
+                                href="/menu">Menu</a>
+                        </li>
+                    @endsession
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link {{ session()->get('active') == 'record' ? 'active' : '' }}"
+                            aria-current="page" href="/admin">Catatan Kriminal</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ session()->get('active') == 'report' ? 'active' : '' }}"
+                            aria-current="page" href="/admin/report">Pelaporan Kasus</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ session()->get('active') == 'user' ? 'active' : '' }}" aria-current="page"
+                            href="/admin/user">Users</a>
+                    </li>
+                @endif
+
+
+
+
             </ul>
 
             @if (!session()->get('user'))
