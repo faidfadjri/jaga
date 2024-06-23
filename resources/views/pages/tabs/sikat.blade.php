@@ -95,11 +95,6 @@
 
                 const inputSIKAT = $('#bukti-kejadian')[0].files;
 
-                if (inputSIKAT.length === 0) {
-                    alert('Silakan unggah bukti kejadian terlebih dahulu.');
-                    return;
-                }
-
                 let formData = new FormData(this);
 
                 $.ajax({
