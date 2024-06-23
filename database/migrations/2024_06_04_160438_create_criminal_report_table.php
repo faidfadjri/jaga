@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->dateTime('date');
             $table->string('location');
+            $table->boolean('status')->default(false);
 
             $table->boolean('verified')->default(false);
 

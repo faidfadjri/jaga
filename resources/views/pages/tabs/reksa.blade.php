@@ -33,9 +33,6 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            const userId = "{{ $user?->id }}";
-
-
             $.ajax({
                 type: "GET",
                 url: "/detail-record",

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Auth\Users;
 use App\Models\Menu\Record;
+use App\Models\Menu\Report;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -92,8 +93,14 @@ class PageController extends Controller
 
     public function report()
     {
+
+
+        $reports = Report::with(['pelapor', 'news']);
         session()->put('active', 'report');
-        return view('pages.admin.report');
+
+        return view('pages.admin.report', [
+            'reports' => $reports->paginate(4)
+        ]);
     }
 
     public function user()

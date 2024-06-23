@@ -5,6 +5,7 @@ namespace App\Models\Menu;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User;
 
 class Report extends Model
@@ -15,8 +16,13 @@ class Report extends Model
     protected $guarded    = ['id'];
     public $incrementing  = true;
 
-    public function user(): BelongsTo
+    public function pelapor(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reportBy', 'id');
+    }
+
+    public function news(): HasOne
+    {
+        return $this->hasOne(ReportNews::class, 'reportId', 'id');
     }
 }
