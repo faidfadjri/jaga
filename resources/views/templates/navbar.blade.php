@@ -11,7 +11,7 @@
             id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 ms-5 mb-lg-0 gap-2" style="width: fit-content">
 
-                @if (session('user')->role != 'admin')
+                @if (session('user')?->role != 'admin')
                     <li class="nav-item">
                         <a class="nav-link {{ session()->get('active') == 'home' ? 'active' : '' }}" aria-current="page"
                             href="/">Home</a>

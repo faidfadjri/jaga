@@ -25,15 +25,21 @@
     Route::get('about', [PageController::class, 'about']);
 
 
-    Route::prefix('admin')->group(function () {
+    Route::middleware('admin')->prefix('admin')->group(function () {
+
+        // Criminal Records
         Route::get('/', [PageController::class, 'record']);
+        Route::get('detail-record', [PageController::class, 'detailRecord']);
+        Route::post('add-record', [PageController::class, 'addRecord']);
+        Route::delete('delete-record/{recordId}', [PageController::class, 'deleteRecord']);
+
         Route::get('/report', [PageController::class, 'report']);
         Route::get('/user', [PageController::class, 'user']);
     });
 
 
     // Menu
-    Route::prefix('menu')->group(function () {
+    Route::middleware('user')->prefix('menu')->group(function () {
         Route::get('/', [MenuController::class, 'index']);
         Route::post('verif/store', [VerifController::class, 'store']);
         Route::post('sikat/store', [SikatController::class, 'store']);
