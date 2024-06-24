@@ -10,4 +10,21 @@
     <p class="paragpraph">
         Data Catatan Kriminal <strong>{{ $username }}</strong>
     </p>
+
+    @foreach ($records as $record)
+    <div class="card px-4 py-3  mt-3">
+            <h4 class="card-title fw-bold">{{$record->crimeType}}</h4>
+            <h6  class="card-text opacity-50">{{$record->description}}</h6>
+            <div class="toast-header">
+                <i class="bi bi-geo-alt mx-2"></i>
+                <p class="fw-medium">{{$record->location}}</p>
+            </div>
+    </div>
+    @endforeach
+
 </div>
+
+    
+
+
+

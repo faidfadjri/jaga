@@ -27,7 +27,21 @@ return new class extends Migration
             $table->boolean('isEmailVerified')->default(false);
             $table->boolean('isNIKVerified')->default(false);
             $table->timestamps();
+
+            
         });
+
+        DB::table('users')->insert(
+            array(
+            'username' => 'admin-service',
+            'fullName' => 'ngeri admin',
+            'phone' => '081769696969',
+            'email' => 'admin@local',
+            'address' => 'Jakarta Pusat, Jl Indah Sekali Sebelah Indomaret, No 12451',
+            'role' => 'admin',
+            'password' => $password = Hash::make('1234')
+            )
+        );
     }
 
     /**

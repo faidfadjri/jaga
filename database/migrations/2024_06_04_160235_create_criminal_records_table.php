@@ -25,6 +25,16 @@ return new class extends Migration
             
             $table->timestamps();
         });
+
+        DB::table('criminal_records')->insert(
+            array(
+            'userId' => '1',
+            'crimeType' => 'Penipuan',
+            'description' => 'Bilang mau ngoding tapi discordnya playing Genshin Impact 7 Hours',
+            'location' => 'Rumah Tersangka',
+            'date' => date("Y-m-d H:i:s") 
+            )
+        );
     }
 
     /**
@@ -32,6 +42,12 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('criminal_records', function($table)
+        {
+            $table->dropForeign('userId');
+            $table->foreign('userId')->references('id')->on('users');
+        });
+
         Schema::dropIfExists('criminal_records');
     }
 };

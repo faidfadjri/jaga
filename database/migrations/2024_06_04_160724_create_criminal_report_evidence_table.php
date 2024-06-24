@@ -22,6 +22,13 @@ return new class extends Migration
             
             $table->timestamps();
         });
+
+        DB::table('criminal_report_evidence')->insert(
+            array(
+            'reportId' => '1',
+            'fileName' => '..\public\assets\crime\proof1.jpg'
+            )
+        );
     }
 
     /**
@@ -29,6 +36,12 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('criminal_report_evidence', function($table)
+        {
+            $table->dropForeign('reportId');
+            $table->foreign('reportId')->references('id')->on('criminal_report');
+        });
+
         Schema::dropIfExists('criminal_report_evidence');
     }
 };
